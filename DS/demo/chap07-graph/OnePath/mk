@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ $# -lt 1 ];
+then
+    echo "Usage: mk <graph-name>"
+    echo "Currently avialable graph: AdjMatrix | AdjList"
+    exit -1
+fi
+
+if [ ! -d ../${1} ];
+then
+    echo "Path ${1} doesn't exist."
+    exit -2
+fi
+
+declare -x GRAPH_PATH=${1}
+
+sed -i "s/GRAPH_PATH/${1}/" path.c
+
+make
+
+sed -i "s/${1}/GRAPH_PATH/" path.c
+unset -v GRAPH_PATH

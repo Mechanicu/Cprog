@@ -1,0 +1,148 @@
+﻿#include <stdio.h>
+#include "readline.h"
+
+#define NAME_LEN 25
+#define MAX_PARTS 100
+
+struct part {
+  int number;
+  char name[NAME_LEN+1];
+  int on_hand;
+};
+
+int find_part(int number, const struct part inv[], int np);
+void insert(struct part inv[], int *np);
+void search(const struct part inv[], int np);
+void update(struct part inv[], int np);
+void print(const struct part inv[], int np);
+
+int read_line(char str[], int n)
+{
+  int ch, i = 0;
+
+  while (isspace(ch = getchar()))
+    ;
+  while (ch != '\n' && ch != EOF) {
+    if (i < n)
+      str[i++] = ch;
+    ch = getchar();
+  }
+  str[i] = '\0';
+  return i;
+}
+
+/**********************************************************
+ * main    
+ **********************************************************/
+int main(void)
+{
+  char code;
+  struct part inventory[MAX_PARTS];
+  int num_parts = 0;
+
+  for (;;) {
+    printf("Enter operation code: ");
+    scanf(" %c", &code);
+    while (getchar() != '\n')   /* skips to end of line */
+      ;
+    switch (code) {
+      case 'i': 
+                 /* 补充代码*/
+      case 's': 
+                 /* 补充代码*/
+      case 'u': 
+                 /* 补充代码*/
+      case 'p': 
+                 /* 补充代码*/
+      case 'q': 
+                 /* 补充代码*/
+      default:  
+                 /* 补充代码*/
+    }
+    printf("\n");
+  }
+}
+
+/**********************************************************
+ * find_part
+ **********************************************************/
+int find_part(int number, const struct part inv[], int np)
+{
+  int i;
+
+  for (i = 0; i < np; i++)
+    if (inv[i].number == number)
+      return i;
+  return -1;
+}
+
+/**********************************************************
+ * insert
+ **********************************************************/
+void insert(struct part inv[], int *np)
+{
+  int part_number;
+
+  if (*np == MAX_PARTS) {
+                 /* 补充代码*/
+  }
+
+  printf("Enter part number: ");
+   /* 补充代码*/
+  if (find_part(part_number, inv, *np) >= 0) {
+                  /* 补充代码*/
+  }
+
+  inv[*np].number = /* 补充代码*/
+  printf("Enter part name: ");
+   /* 补充代码：read_line调用*/
+  printf("Enter quantity on hand: ");
+   /* 补充代码*/
+  (*np)++;
+}
+
+/**********************************************************
+ * search
+ **********************************************************/
+void search(const struct part inv[], int np)
+{
+  int i, number;
+
+  printf("Enter part number: ");
+   /* 补充代码*/
+  i =  /* 补充代码*/
+  if (i >= 0) {
+     /* 补充代码*/
+  } else
+    /* 补充代码*/
+}
+
+/**********************************************************
+ * update
+ **********************************************************/
+void update(struct part inv[], int np)
+{
+  int i, number, change;
+
+  printf("Enter part number: ");
+   /* 补充代码*/
+  i =  /* 补充代码*/;
+  if (i >= 0) {
+     /* 补充代码*/
+  } else
+     /* 补充代码*/
+}
+
+/**********************************************************
+ * print: Prints a listing of all parts in the inv array, *
+ *        showing the part number, part name, and         *
+ *        quantity on hand. Parts are printed in the      *
+ *        order in which they were entered into the       *
+ *        array.                                          *
+ **********************************************************/
+void print(const struct part inv[], int np)
+{
+  int i;
+
+   /* 补充代码*/
+}

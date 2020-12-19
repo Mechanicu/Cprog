@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ $# -lt 2 ];
+then
+    echo "Usage: mk <graph-name> <search-method>"
+    echo "Currently avialable graph: AdjMatrix | AdjList"
+    echo "Avialable method: depth | breadth"
+    exit -1
+fi
+
+if [ ! -d ../${1} ];
+then
+    echo "Path ${1} doesn't exist."
+    exit -2
+fi
+
+if [ ${2} == "depth" ];
+then
+    declare -x container=stack
+else
+    declare -x container=queue
+fi
+
+declare -x grpath=${1} method=${2}_${1}
+
+sed -i "s/GRPATH/${1}/" search.h
+
+make
+unset -v container grpath method
+sed -i "s/${1}/GRPATH/" search.h
