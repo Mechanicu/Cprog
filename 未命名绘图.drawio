@@ -1,0 +1,103 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="第 1 页" id="NB57gn9alocdChEb9Lhq">
+    <mxGraphModel dx="1814" dy="815" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="1000" math="0" shadow="0" adaptiveColors="auto">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="root" parent="1" style="swimlane;startSize=26;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=4;fontSize=16;" value="init.scope" vertex="1">
+          <mxGeometry height="693" width="780" x="43" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="systemSlice" parent="root" style="swimlane;startSize=24;html=1;fillColor=#e8f4f8;strokeColor=#6c8ebf;strokeWidth=4;fontSize=16;" value="system.slice" vertex="1">
+          <mxGeometry height="304" width="740" x="20" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="containerdSvc" parent="systemSlice" style="swimlane;startSize=24;html=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=1;fontSize=16;strokeWidth=4;" value="containerd.service — Delegate=yes 委派子树" vertex="1">
+          <mxGeometry height="250" width="358" x="353" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="proc" parent="containerdSvc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;strokeWidth=4;" value="containerd / dockerd 进程（main PID）" vertex="1">
+          <mxGeometry height="67" width="101" x="13" y="49" as="geometry" />
+        </mxCell>
+        <mxCell id="docker" parent="containerdSvc" style="swimlane;startSize=24;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;dashed=1;fontSize=16;strokeWidth=4;" value="docker-.scope" vertex="1">
+          <mxGeometry height="180" width="220" x="127" y="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cA" parent="docker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=16;strokeWidth=4;" value="容器 A&lt;br&gt;memory.max=512M" vertex="1">
+          <mxGeometry height="46" width="190" x="15" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cB" parent="docker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=16;strokeWidth=4;" value="容器 B&lt;br&gt;pids.max=100" vertex="1">
+          <mxGeometry height="46" width="190" x="15" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="OIMi3wYwkf1cI0HG6jR0-1" parent="systemSlice" style="swimlane;startSize=24;html=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=1;fontSize=16;strokeWidth=4;" value="nginx.service — no delegate" vertex="1">
+          <mxGeometry height="151" width="307" x="17" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="nginx" parent="OIMi3wYwkf1cI0HG6jR0-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;strokeWidth=4;" value="nginx.service&lt;br&gt;普通 service（systemd 直接管理）" vertex="1">
+          <mxGeometry height="54" width="180" x="38" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="userSlice" parent="root" style="swimlane;startSize=24;html=1;fillColor=#e8f4f8;strokeColor=#6c8ebf;strokeWidth=4;fontSize=16;" value="user.slice" vertex="1">
+          <mxGeometry height="170" width="740" x="26" y="512" as="geometry" />
+        </mxCell>
+        <mxCell id="userSvc" parent="userSlice" style="swimlane;startSize=24;html=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=1;fontSize=16;strokeWidth=4;" value="user@1000.service — Delegate=yes" vertex="1">
+          <mxGeometry height="100" width="490" x="64" y="43" as="geometry" />
+        </mxCell>
+        <mxCell id="uclient" parent="userSvc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;strokeWidth=4;" value="systemd --user&lt;br&gt;（用户级别systemd）" vertex="1">
+          <mxGeometry height="50" width="210" x="135" y="36" as="geometry" />
+        </mxCell>
+        <mxCell id="systemd" parent="root" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=4;fontSize=16;" value="systemd（PID 1）&lt;br&gt;cgroup 层级 single-writer" vertex="1">
+          <mxGeometry height="60" width="260" x="266" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="root" source="systemd" style="strokeColor=#d6b656;dashed=1;fontSize=16;edgeStyle=orthogonalEdgeStyle;rounded=0;libavoidRouting=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;strokeWidth=4;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="containerdSvc" value="Delegate=yes — 管理权到此为止">
+          <mxGeometry relative="1" x="-0.5423" y="-93" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="461" y="168" />
+              <mxPoint x="463" y="168" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="root" source="systemd" style="strokeColor=#cc0000;dashed=1;fontColor=#cc0000;fontSize=16;edgeStyle=orthogonalEdgeStyle;rounded=0;libavoidRouting=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;strokeWidth=4;" target="docker" value="✗ 不碰子树：不建/删组、不迁移进程、&lt;div&gt;不改属性（含 main PID 自身）&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.0442" y="16" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="610" y="89" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OIMi3wYwkf1cI0HG6jR0-7" edge="1" parent="root" source="systemd" style="strokeColor=#6c8ebf;fontSize=16;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=4;" target="userSlice" value="直接管理">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-84.9" y="94.03" />
+              <mxPoint x="-84.9" y="597" />
+            </Array>
+            <mxPoint x="244.97000000000003" y="265" as="sourcePoint" />
+            <mxPoint x="4.969999999999999" y="716" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="root" source="systemd" style="strokeColor=#d6b656;dashed=1;fontSize=16;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=4;" target="userSvc" value="权限下沉：User= → chown() 子树，&lt;br&gt;非特权进程可在树内 mkdir / 写 subtree_control">
+          <mxGeometry relative="1" x="0.7311" y="36" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="526" y="56.83" />
+              <mxPoint x="856.5" y="56.83" />
+              <mxPoint x="856.5" y="615.42" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="systemd" style="strokeColor=#6c8ebf;fontSize=16;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=4;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-42.59" y="129.03" />
+              <mxPoint x="-42.59" y="363.52" />
+            </Array>
+            <mxPoint x="67.76" y="363.52" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="proc" style="strokeColor=#9673a6;fontSize=16;edgeStyle=orthogonalEdgeStyle;rounded=0;libavoidRouting=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;" target="docker" value="mkdir 子 cgroup&lt;div&gt;写 memory.max / pids.max&lt;/div&gt;">
+          <mxGeometry relative="1" x="-0.6601" y="-68" as="geometry">
+            <mxPoint x="-33" y="-8" as="offset" />
+            <Array as="points">
+              <mxPoint x="480" y="379" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
